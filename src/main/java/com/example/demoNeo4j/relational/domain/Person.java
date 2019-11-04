@@ -1,5 +1,6 @@
 package com.example.demoNeo4j.relational.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -16,13 +18,15 @@ public class Person {
 	@Id @GeneratedValue
 	private Long id;
 	private String name;
-	@ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "Person_Movie", 
-        joinColumns = { @JoinColumn(name = "person_id",referencedColumnName = "id") }, 
-        inverseJoinColumns = { @JoinColumn(name = "movie_id",referencedColumnName = "id") }
-    )
-	List<Movie> movies;
+//	@ManyToMany(cascade = { CascadeType.ALL })
+//    @JoinTable(
+//        name = "person_movie", 
+//        joinColumns = { @JoinColumn(table = "person", name = "id") }, 
+//        inverseJoinColumns = { @JoinColumn(table = "movie", name = "id") }
+//    )
+	@ManyToOne
+	@JoinColumn(name="movieId", referencedColumnName = "id")
+	Movie movie;
 	
 	public Person(Long id, String name) {
 		super();
