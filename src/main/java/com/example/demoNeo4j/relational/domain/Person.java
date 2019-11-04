@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -18,15 +17,13 @@ public class Person {
 	@Id @GeneratedValue
 	private Long id;
 	private String name;
-//	@ManyToMany(cascade = { CascadeType.ALL })
-//    @JoinTable(
-//        name = "person_movie", 
-//        joinColumns = { @JoinColumn(table = "person", name = "id") }, 
-//        inverseJoinColumns = { @JoinColumn(table = "movie", name = "id") }
-//    )
-	@ManyToOne
-	@JoinColumn(name="movieId", referencedColumnName = "id")
-	Movie movie;
+	@ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+        name = "person_movie", 
+        joinColumns = { @JoinColumn(table = "person", name = "personId", referencedColumnName = "id") }, 
+        inverseJoinColumns = { @JoinColumn(table = "movie", name = "movieId", referencedColumnName = "id") }
+    )
+	List<Movie> movies = new ArrayList<>();
 	
 	public Person(Long id, String name) {
 		super();
