@@ -9,6 +9,6 @@ import com.example.demoNeo4j.graph.domain.GraphPerson;
 
 public interface GraphPersonRepository extends Neo4jRepository<GraphPerson, Long>{
 
-	@Query("MATCH (p:Person)<-[r:RATED]-(m:Movie) RETURN p,r,m")
+	@Query("MATCH (p:Person)<-[r:RATED]-(m:Movie) RETURN p")
 	public List<GraphPerson> getAllPeople();
 }
