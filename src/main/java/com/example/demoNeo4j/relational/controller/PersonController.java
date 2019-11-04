@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demoNeo4j.graph.Service.GraphPersonService;
-import com.example.demoNeo4j.graph.domain.GraphPerson;
+import com.example.demoNeo4j.relational.Service.PersonService;
+import com.example.demoNeo4j.relational.domain.Person;
 
 @RestController
 @RequestMapping(path = "/relational")
 public class PersonController {
 
 	@Autowired
-	private GraphPersonService graphPersonService;
+	private PersonService personService;
 	
 	@GetMapping()
-	public List<GraphPerson> getPerson() {
-		return graphPersonService.getAll();
+	public List<Person> getPerson() {
+		return personService.getAll();
 	}
 }

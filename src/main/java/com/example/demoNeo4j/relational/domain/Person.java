@@ -1,5 +1,6 @@
 package com.example.demoNeo4j.relational.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,11 +19,11 @@ public class Person {
 	private String name;
 	@ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-        name = "Person_Movie", 
-        joinColumns = { @JoinColumn(name = "person_id",referencedColumnName = "id") }, 
-        inverseJoinColumns = { @JoinColumn(name = "movie_id",referencedColumnName = "id") }
+        name = "person_movie", 
+        joinColumns = { @JoinColumn(table = "person", name = "personId", referencedColumnName = "id") }, 
+        inverseJoinColumns = { @JoinColumn(table = "movie", name = "movieId", referencedColumnName = "id") }
     )
-	List<Movie> movies;
+	List<Movie> movies = new ArrayList<>();
 	
 	public Person(Long id, String name) {
 		super();

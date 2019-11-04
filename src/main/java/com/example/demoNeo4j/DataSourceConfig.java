@@ -38,15 +38,15 @@ public class DataSourceConfig {
 	private static final Logger LOG = LoggerFactory.getLogger(DataSourceConfig.class);
 
 	@Bean
-	public org.neo4j.ogm.config.Configuration getConfiguration() {
+	public org.neo4j.ogm.config.Configuration configuration() {
 		org.neo4j.ogm.config.Configuration configuration = new org.neo4j.ogm.config.Configuration.Builder()
 				.uri("bolt://localhost").credentials("neo4j", "admin").build();
 		return configuration;
 	}
 
 	@Bean
-	public SessionFactory getSessionFactory() {
-		return new SessionFactory(getConfiguration(), "com.example.demoNeo4j.graph");
+	public SessionFactory sessionFactory() {
+		return new SessionFactory(configuration(), "com.example.demoNeo4j.graph");
 	}
 
 //  @Bean
@@ -83,7 +83,7 @@ public class DataSourceConfig {
 	@Autowired
 	@Bean(name = "neo4jTransactionManager")
 	public Neo4jTransactionManager neo4jTransactionManager() {
-		return new Neo4jTransactionManager(getSessionFactory());
+		return new Neo4jTransactionManager(sessionFactory());
 	}
 
 	@Autowired
